@@ -1,35 +1,38 @@
 var http=require('http');
 
+var url=require('url');
 //imported the module
 
 var server=http.createServer((req,res)=>{
 
-var pathname=url.parse(req.url);
+const path_name=url.parse(req.url);
 
+console.log(path_name);
 //check the url endpoint
 
-if(pathname!=='/hello')
-    return errorHandler(res,404);
+/*if(path_name!=='/hello')
+    return errorHandler(res,404);*/
 
-var method=req.method.toUpperCase;
+var method=req.method.toUpperCase();
 
+console.log(method);
 //check if GET or POST
 
-res.setHeader('Content-Type', 'application/json');
+res.setHeader('Content-Type', 'text/html');
 res.writeHead(200, 'request is good');
 
 if(method=='POST'){
 
-  var response=JSON.stringify({message:'Hello from POST'});
+  res.write('hello from POST');
 
-    res.end(response);
+    res.end();
 }
 
 if(method=='GET'){
 
-var response=JSON.stringify({message:'hello from GET'});
+res.write('hello from GET');
 
-res.end(response);
+res.end();
 
 }
 
