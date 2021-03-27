@@ -5,13 +5,13 @@ var url=require('url');
 
 var server=http.createServer((req,res)=>{
 
-const path_name=url.parse(req.url);
+const path_name=url.parse(req.url).pathname;
 
 console.log(path_name);
 //check the url endpoint
 
-/*if(path_name!=='/hello')
-    return errorHandler(res,404);*/
+if(path_name!=='/hello')
+    return errorHandler(res,404);
 
 var method=req.method.toUpperCase();
 
