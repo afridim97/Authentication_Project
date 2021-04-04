@@ -1,11 +1,21 @@
 var http=require('http');
 
 var url=require('url');
+
+var querystring=require('querystring');
 //imported the module
 
 var server=http.createServer((req,res)=>{
 
 const path_name=url.parse(req.url).pathname;
+
+var query=url.parse(req.url).search;
+
+//console.log(query.substr(1));
+
+query=querystring.parse(query.substr(1));
+
+console.log(query.name);
 
 console.log(path_name);
 //check the url endpoint
@@ -30,7 +40,11 @@ if(method=='POST'){
 
 if(method=='GET'){
 
-res.write('hello from GET');
+//res.write('hello from GET');
+
+//res.end();
+
+res.write('hello '+query.name);
 
 res.end();
 
