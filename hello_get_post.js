@@ -11,13 +11,8 @@ const path_name=url.parse(req.url).pathname;
 
 var query=url.parse(req.url).search;
 
-//console.log(query.substr(1));
-
 query=querystring.parse(query.substr(1));
 
-console.log(query.name);
-
-console.log(path_name);
 //check the url endpoint
 
 if(path_name!=='/hello')
@@ -25,7 +20,6 @@ if(path_name!=='/hello')
 
 var method=req.method.toUpperCase();
 
-console.log(method);
 //check if GET or POST
 
 res.setHeader('Content-Type', 'text/html');
