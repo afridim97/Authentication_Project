@@ -150,4 +150,144 @@ res.json({message:"user successfully registered"});
 
 });
 
+/**
+ * Enter username and password for authentication
+ * 
+ * Enter details to be updated (school, house, or both)
+ * 
+ * Searches array of existing users for matching username and password
+ * 
+ * If found, updates the provided details for that user in the array
+ * 
+ * If not found, returns 401 "authentication error" message, indicating 
+ * 
+ * invalid username and/or password 
+ */
+
+app.put("/update",(req,res)=>{
+
+//initial part similar to sending a POST request
+
+const userData={};
+
+const errors={};
+
+['username','password','school','house'].forEach(key=>{
+
+    if(req.body[key]===null||req.body[key]===undefined){
+
+        errors[key]=`${key} is undefined`;
+        
+    }
+
+    else if(req.body[key]===""){
+
+        errors[key]=`${key} is empty`;
+
+    }
+
+    else{
+
+        userData[key]=req.body[key];
+
+    }
+
+});
+
+    if(Object.keys(errors).length>0){
+
+        res.status(400).json(errors);
+
+        return;
+
+    }
+
+    /**
+     * Loops through array of existing users to find a 
+     * 
+     * match for the username and password provided.
+     * 
+     * If found, sets isValid to true and saves index 
+     * 
+     * of this user object in the array.
+     * 
+     */
+
+    let isValid=false;
+
+    let requestedUserIndexinAllUsers=-1;
+
+    for(let i=0;i<allUsersData.length;i++){
+
+        const alreadyExistingUser=allUsersData[i];
+
+        if(alreadyExistingUser.username==userData.username && alreadyExistingUser.password==userData.password){
+
+            isValid=true;
+
+            requestedUserIndexinAllUsers=i;
+
+            break;
+
+        }
+
+    }
+
+    if(!isValid){
+
+/**
+ * 
+ * If username and/or password not found, sends error code 401 indicating
+ * failed authentication.
+ * 
+*/
+
+        res.status(401).json({message:"Username/password is invalid"});
+
+        return;
+    }
+
+    else{
+
+//if found, updates this user object in array of user objects
+
+        allUsersData[requestedUserIndexinAllUsers]=userData;
+
+        res.json({message:"Update successful!"});
+    }
+
+});
+
+/**
+ * Retrieves information about the registered users
+ * 
+ * Made a copy of the array of users so that 
+ * 
+ * original user data is not unintentionally modified.
+ * 
+ * Password information of all users is deleted 
+ * 
+ * for user confidentiality before returning the details.
+ * 
+ */
+
+app.get("/retrieve",(req,res)=>{
+
+//creates a copy of the array of users
+const usersDataCopy=JSON.parse(JSON.stringify(allUsersData));
+
+usersDataCopy.forEach(user=>{
+
+//deletes password parameter for all users
+
+delete usersDataCopy['password'];
+
+});
+
+//returns array of users with all details except password
+
+res.json(usersDataCopy);
+
+});
+
 app.listen(7050,()=>console.log("listening on port 7050"));
