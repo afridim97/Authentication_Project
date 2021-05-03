@@ -290,4 +290,6 @@ res.json(usersDataCopy);
 
 });
 
+// create a server to listen on the specified port
+
 app.listen(7050,()=>console.log("listening on port 7050"));
