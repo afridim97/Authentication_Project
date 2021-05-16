@@ -7,6 +7,6 @@ basic_authentication.js uses GET,POST, PUT requests to enter user details and up
 
 jwt_authentication.js enables authentication using JWT tokens
 
-Remaining files:
+Practice:
 
-Practice to gain familiarity with HTTP concepts.
+Study practice to gain familiarity with HTTP concepts.
