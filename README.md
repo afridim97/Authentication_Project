@@ -10,3 +10,8 @@ jwt_authentication.js enables authentication using JWT tokens
 Practice:
 
 Study practice to gain familiarity with HTTP concepts.
+
+Useful Resources:
+
+1) What is a JWT and what does it do? https://stormpath.com/blog/nodejs-jwt-create-verify
+2) A simple example of JWT in action: https://stackabuse.com/authentication-and-authorization-with-jwts-in-express-js/
