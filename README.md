@@ -1,11 +1,15 @@
 # Authentication_Project
-Learning how to implement authentication in an application using Node.js and JSON Web Tokens
+Learning how to implement authentication and authorization in an application using Node.js and JSON Web Tokens
+
+jwt_authentication:
+
+jwt_authentication.js: Uses JWT tokens to authenticate a session. 
+
+books.js: Retrieves books info after successful authentication/authorization
 
 Basic_Authentication:
 
 basic_authentication.js uses GET,POST, PUT requests to enter user details and update them.
-
-jwt_authentication.js enables authentication using JWT tokens
 
 Practice:
 
